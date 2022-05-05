@@ -17,7 +17,7 @@ import (
 
 	"github.com/twitchtv/twirp"
 
-	reflection "github.com/bakins/twirp-reflection"
+	reflection "github.com/bakins/twirp-reflection/v0"
 )
 
 type Client struct {

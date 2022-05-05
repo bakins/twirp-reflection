@@ -2,7 +2,7 @@
 
 Twirp Server Reflection similar to  [grpc server reflection](https://github.com/grpc/grpc/blob/master/doc/server-reflection.md)
 
-
+This includes a [Go server and client implementation](./reflection).
 
 ## Status
 

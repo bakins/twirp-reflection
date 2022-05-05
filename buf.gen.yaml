@@ -1,9 +1,10 @@
 version: v1
 plugins:
   - name: go
-    out: ./v0
-    opt: paths=source_relative
+    out: .
+    opt:
+      - paths=source_relative
   - name: twirp
     out: .
-    opt: ./v0
+    opt:
       - paths=source_relative

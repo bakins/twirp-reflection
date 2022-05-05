@@ -10,8 +10,8 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/twitchtv/twirp/example"
 
-	twirp_reflection "github.com/bakins/twirp-reflection"
 	"github.com/bakins/twirp-reflection/reflection"
+	twirp_reflection "github.com/bakins/twirp-reflection/v0"
 )
 
 func TestHandler(t *testing.T) {
@@ -41,7 +41,7 @@ func TestHandler(t *testing.T) {
 	require.Equal(
 		t,
 		[]string{
-			"bakins.twirp.reflection.v1.ServerReflectionService",
+			"bakins.twirp.reflection.v0.ServerReflectionService",
 			"twitch.twirp.example.Haberdasher",
 		},
 		services,
@@ -52,7 +52,7 @@ func TestHandler(t *testing.T) {
 	require.Equal(t, "twitch.twirp.example", descriptor.GetPackage())
 	require.Len(t, descriptor.GetService(), 1)
 
-	descriptors, err := client.GetSymbolDescriptor(ctx, "bakins.twirp.reflection.v1.ListServicesResponse")
+	descriptors, err := client.GetSymbolDescriptor(ctx, "bakins.twirp.reflection.v0.ListServicesResponse")
 	require.NoError(t, err)
 	require.Len(t, descriptors, 1)
 	require.Len(t, descriptors[0].GetService(), 1)
