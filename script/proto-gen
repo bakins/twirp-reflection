@@ -7,4 +7,4 @@ cd "$(dirname "$SCRIPT_DIR")"
 
 buf generate
 
-mv bakins/twirp/reflection/v1/*.go .
+#mv bakins/twirp/reflection/v0/*.go .

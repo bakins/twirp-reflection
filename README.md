@@ -1,2 +1,14 @@
 # twirp-reflection
 
+Twirp Server Reflection similar to  [grpc server reflection](https://github.com/grpc/grpc/blob/master/doc/server-reflection.md)
+
+
+
+## Status
+
+This should be considered alpha quality. It should not be used for production.
+It is being actively developed. Patches/Comments/Issues are welcome.
+
+## License
+
+see [LICENSE](./LICENSE)

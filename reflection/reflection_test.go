@@ -1,4 +1,4 @@
-package server_test
+package reflection_test
 
 import (
 	"context"
@@ -10,32 +10,27 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/twitchtv/twirp/example"
 
-	reflection "github.com/bakins/twirp-reflection"
-	"github.com/bakins/twirp-reflection/client"
-	"github.com/bakins/twirp-reflection/server"
+	twirp_reflection "github.com/bakins/twirp-reflection"
+	"github.com/bakins/twirp-reflection/reflection"
 )
 
 func TestHandler(t *testing.T) {
 	ts := example.NewHaberdasherServer(&nopHaberdasher{})
 
-	h := server.New()
+	s := reflection.NewServer()
 
-	h.Register(ts)
-
-	rfl := reflection.NewServerReflectionServiceServer(h)
-
-	h.Register(rfl)
-
+	s.RegisterService(ts)
+	s.RegisterService(s)
 	mux := http.NewServeMux()
 
 	mux.Handle(ts.PathPrefix(), ts)
-	mux.Handle(rfl.PathPrefix(), rfl)
+	mux.Handle(s.PathPrefix(), s)
 
 	svr := httptest.NewServer(mux)
 	defer svr.Close()
 
-	base := reflection.NewServerReflectionServiceProtobufClient(svr.URL, http.DefaultClient)
-	client := client.New(base)
+	base := twirp_reflection.NewServerReflectionServiceProtobufClient(svr.URL, http.DefaultClient)
+	client := reflection.NewClient(base)
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*30)
 	defer cancel()
@@ -56,6 +51,12 @@ func TestHandler(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, "twitch.twirp.example", descriptor.GetPackage())
 	require.Len(t, descriptor.GetService(), 1)
+
+	descriptors, err := client.GetSymbolDescriptor(ctx, "bakins.twirp.reflection.v1.ListServicesResponse")
+	require.NoError(t, err)
+	require.Len(t, descriptors, 1)
+	require.Len(t, descriptors[0].GetService(), 1)
+	require.Equal(t, "ServerReflectionService", descriptors[0].GetService()[0].GetName())
 }
 
 type nopHaberdasher struct{}

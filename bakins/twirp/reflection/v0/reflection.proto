@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package bakins.twirp.reflection.v1;
+package bakins.twirp.reflection.v0;
 
 option go_package="github.com/bakins/twirp-reflection";
 
