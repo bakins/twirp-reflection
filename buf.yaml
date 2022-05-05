@@ -5,3 +5,7 @@ breaking:
 lint:
   use:
     - DEFAULT
+    - UNARY_RPC
+  except:
+    - PACKAGE_VERSION_SUFFIX
+
