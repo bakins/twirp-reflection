@@ -1,6 +1,6 @@
 # twirp-reflection
 
-[![PkgGoDev](https://pkg.go.dev/badge/github.com/bakins/twirp-reflection)](https://pkg.go.dev/github.com/bakins/twirp-reflection)
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/bakins/twirp-reflection/reflection)](https://pkg.go.dev/github.com/bakins/twirp-reflection/reflection)
 
 Twirp Server Reflection similar to  [grpc server reflection](https://github.com/grpc/grpc/blob/master/doc/server-reflection.md)
 
