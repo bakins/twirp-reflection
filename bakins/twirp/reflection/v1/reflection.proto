@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package bakins.twirp.reflection.v1;
+
+option go_package="github.com/bakins/twirp-reflection";
+
+service ServerReflectionService {
+    rpc ListServices(ListServicesRequest) returns (ListServicesResponse);
+    rpc GetServiceDescriptor(GetServiceDescriptorRequest) returns (GetServiceDescriptorResponse);
+    rpc GetSymbolDescriptor(GetSymbolDescriptorRequest) returns (GetSymbolDescriptorResponse);
+}
+
+message ListServicesRequest {
+}
+
+message ListServicesResponse {
+    repeated ListServiceResponse services = 1;
+}
+
+message ListServiceResponse {
+    // Full name of a registered service, including its package name. The format
+    // is <package>.<service>
+    string name = 1;
+}
+
+message GetServiceDescriptorRequest {
+     // Full name of a registered service, including its package name. The format
+    // is <package>.<service>
+    string name = 1;
+}
+
+message GetServiceDescriptorResponse {
+    // Serialized FileDescriptorProto message. We avoid taking a dependency on
+    // descriptor.proto, which uses proto2 only features, by making them opaque
+    // bytes instead.
+    bytes file_descriptor = 1;
+}
+
+message GetSymbolDescriptorRequest {
+    string symbol = 1;
+}
+message GetSymbolDescriptorResponse {
+    repeated bytes file_descriptors = 1;
+}
